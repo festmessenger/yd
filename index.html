@@ -33,7 +33,7 @@
   --shadow:0 2px 12px rgba(0,0,0,.3);
   --shadow2:0 8px 32px rgba(0,0,0,.5);
 }
-html,body{height:100%;overflow:hidden}
+html,body{height:100%;height:-webkit-fill-available;overflow:hidden}
 body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex;flex-direction:column;transition:background .3s,color .3s}
 
 /* ═══ SCREENS ═══ */
@@ -359,6 +359,28 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
 
 
 [data-theme="dark"] .settings-row-logout{background:#2a0d0d!important;border-color:#4a1a1a!important}
+
+
+/* ── FAB (mobile new chat) ── */
+.fab{display:none;position:fixed;bottom:80px;right:16px;width:52px;height:52px;
+  border-radius:50%;background:var(--accent);color:#fff;border:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.25);cursor:pointer;z-index:50;
+  align-items:center;justify-content:center;transition:.2s}
+.fab:hover{transform:scale(1.08)}
+.fab:active{transform:scale(.95)}
+.fab svg{width:22px;height:22px}
+@media(max-width:680px){.fab{display:flex}}
+
+
+@media(max-width:680px){
+  .settings-panel{width:100%;border-radius:0;border:none}
+  .settings-panel.on{transform:translateX(0)}
+  #active-chat{min-height:0}
+  .msgs-wrap{padding:8px 10px}
+  .bubble{font-size:13px}
+  .input-area{padding:8px 10px;gap:5px}
+  .ibox{font-size:14px}
+}
 
 /* ═══ SCROLLBAR ═══ */
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
@@ -774,7 +796,7 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
     <div class="empty-state" id="empty-state">
       <div class="big">💬</div>
       <p>Выберите чат</p>
-      <small>или создайте новый нажав ✏️</small>
+      <small>или создайте новый нажав +</small>
     </div>
 
     <!-- ACTIVE CHAT -->
@@ -1055,9 +1077,19 @@ async function yRead(p) {
   const r = await yReq(`/resources/download?path=${enc(p)}`);
   if (!r.ok) return null;
   const {href} = await r.json();
-  const fr = await fetch(href);
-  if (!fr.ok) return null;
-  return fr.json();
+  // Try direct first (works locally and on same-origin)
+  try {
+    const fr = await fetch(href);
+    if (fr.ok) return fr.json();
+  } catch {}
+  // CORS blocked (e.g. GitHub Pages) - use Cloudflare Worker proxy
+  try {
+    const proxy = (localStorage.getItem('fm_proxy') || 'https://yd-proxy.festmessenger.workers.dev')
+      + '/?url=' + encodeURIComponent(href);
+    const fr2 = await fetch(proxy);
+    if (fr2.ok) return fr2.json();
+  } catch {}
+  return null;
 }
 async function yWrite(p, data) {
   const r = await yReq(`/resources/upload?path=${enc(p)}&overwrite=true`);
@@ -1131,6 +1163,20 @@ function initIcons() {
   // Style
   const style = localStorage.getItem('fm_style') || 'business';
   document.documentElement.setAttribute('data-style', style);
+}
+
+function configProxy() {
+  const current = localStorage.getItem('fm_proxy') || 'https://yd-proxy.festmessenger.workers.dev';
+  const url = prompt('URL вашего CORS прокси (Cloudflare Worker):\n\nОставьте пустым для сброса', current);
+  if (url === null) return;
+  if (url.trim()) {
+    localStorage.setItem('fm_proxy', url.trim().replace(/\/$/, ''));
+    toast('Прокси сохранён');
+  } else {
+    localStorage.removeItem('fm_proxy');
+    toast('Прокси сброшен');
+  }
+  renderSettings();
 }
 
 async function init() {
