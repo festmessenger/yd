@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "releaseDate": "2026-03-15",
+  "minTokenWarningDays": 30,
+  "pollInterval": 15000,
+  "maxImageSize": 1200,
+  "imageQuality": 0.82,
+  "editTTL": 900000,
+  "defaultLanguage": "ru",
+  "supportTelegram": "https://t.me/FestMessengerBot",
+  "supportEmail": "festmessenger@yandex.ru",
+  "repoUrl": "https://github.com/festmessenger/yd",
+  "pagesUrl": "https://festmessenger.github.io/yd/",
+  "changelog": "Первый публичный релиз. Яндекс Диск как транспорт, веб-интерфейс, PWA."
+}

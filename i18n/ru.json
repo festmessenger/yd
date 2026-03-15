@@ -1,0 +1,87 @@
+{
+  "app": { "name": "FestMessenger", "tagline": "Безопасный мессенджер на вашем Яндекс Диске", "version": "Версия" },
+  "auth": {
+    "login": "Войти", "register": "Регистрация",
+    "username": "Имя пользователя", "password": "Пароль",
+    "password_repeat": "Повтор пароля", "password_new": "Новый пароль",
+    "password_placeholder": "минимум 4 символа",
+    "password_leave_empty": "оставьте пустым если не менять",
+    "enter": "Войти", "create_account": "Создать аккаунт", "logout": "Выйти",
+    "token_yandex": "OAuth токен Яндекса", "change_token": "Изменить токен",
+    "token_new": "Новый токен", "token_update": "Обновить",
+    "how_to_get_token": "Как получить токен",
+    "checking": "Проверяю...", "logging_in": "Вхожу...", "creating": "Создаю аккаунт...",
+    "errors": {
+      "fill_all": "Заполните все поля", "username_format": "Имя: a-z 0-9 _ (2-20 символов)",
+      "password_short": "Пароль минимум 4 символа", "passwords_mismatch": "Пароли не совпадают",
+      "user_not_found": "Пользователь не найден", "wrong_password": "Неверный пароль",
+      "name_taken": "Имя уже занято", "token_invalid": "Токен недействителен"
+    },
+    "success": { "welcome": "Добро пожаловать!", "account_created": "Аккаунт создан!", "token_saved": "Сохранено!" }
+  },
+  "setup": {
+    "title": "Первый запуск", "subtitle": "Введите токен Яндекса",
+    "save_continue": "Сохранить и продолжить →", "gen_link": "Сгенерировать OAuth ссылку", "client_id": "ClientID"
+  },
+  "pin": {
+    "title": "PIN-код", "enter": "Введите PIN для входа", "set_new": "Введите новый PIN (4 цифры)",
+    "repeat": "Повторите PIN", "retry": "Введите PIN заново", "logout": "Выйти из аккаунта"
+  },
+  "sidebar": {
+    "online": "онлайн", "search": "Поиск чатов...", "new": "Новый чат или группа",
+    "direct": "Личные", "groups": "Группы", "no_chats": "Нет чатов", "create_hint": "Нажмите + чтобы создать чат"
+  },
+  "chat": {
+    "select": "Выберите чат", "select_hint": "или создайте новый нажав +",
+    "placeholder": "Сообщение...", "readonly": "Только чтение",
+    "load_more": "↑ Загрузить ещё", "today": "Сегодня", "yesterday": "Вчера",
+    "typing": "печатает...", "search": "Поиск в чате...", "members": "участников",
+    "pinned": "Закреплено", "deleted": "Сообщение удалено", "edited": "изм.",
+    "file_deleted": "Файл удалён", "recording": "Запись... отпустите для отправки",
+    "no_mic": "Нет доступа к микрофону", "caption": "Подпись..."
+  },
+  "preview": { "voice": "🎙 Голосовое", "photo": "🖼 Фото", "video": "🎬 Видео", "file": "📎 Файл", "empty": "Нет сообщений" },
+  "ctx": { "react": "Реакция", "reply": "Ответить", "forward": "Переслать", "edit": "Редактировать", "pin": "Закрепить", "delete_me": "Удалить у себя", "delete_all": "Удалить у всех" },
+  "modal": {
+    "dm_title": "Личный чат", "dm_sub": "Выберите получателя",
+    "group_title": "Новая группа", "group_sub": "Название и участники",
+    "group_name": "Название группы", "group_placeholder": "Семья",
+    "rights": "Участники и права", "read": "чит.", "write": "пис.",
+    "fwd_title": "Переслать", "fwd_sub": "Выберите чат",
+    "edit_title": "Редактировать", "edit_sub": "Изменить текст",
+    "bg_title": "Фон чата", "bg_sub": "Выберите или загрузите", "bg_upload": "Загрузить картинку", "bg_remove": "Убрать фон",
+    "media_title": "Медиафайлы", "media_empty": "Нет файлов",
+    "save": "Сохранить", "cancel": "Отмена", "close": "Закрыть", "create": "Создать", "forward": "Переслать", "open": "Открыть чат"
+  },
+  "new_chat": {
+    "title": "Что создать?",
+    "direct": "Личный чат", "direct_sub": "Переписка с одним пользователем",
+    "group": "Группа", "group_sub": "Чат для нескольких участников"
+  },
+  "settings": {
+    "title": "Настройки", "back": "Назад",
+    "avatar": "Цвет аватара", "theme": "Тема", "theme_light": "Светлая", "theme_dark": "Тёмная",
+    "security": "Безопасность", "pin": "PIN-код", "pin_on": "Включён", "pin_off": "Выключен",
+    "notifications": "Уведомления", "sounds": "Звуки",
+    "account": "Аккаунт", "save": "Сохранить изменения",
+    "logout": "Выйти", "version": "Версия",
+    "token_expires": "Токен истекает", "token_expired": "⚠️ Токен истёк! Обновите.",
+    "token_soon": "⚠️ Токен истекает через {days} дн.",
+    "support": "Написать разработчикам", "language": "Язык",
+    "update_available": "Доступно обновление", "update_btn": "Обновить", "up_to_date": "Актуальная версия",
+    "transport": "Транспорт"
+  },
+  "poll": { "updated": "обновлено:", "updating": "обновление..." },
+  "toast": {
+    "saved": "Сохранено", "deleted": "Удалено", "forwarded": "Переслано", "edited": "Изменено",
+    "pin_set": "PIN установлен", "pin_removed": "PIN удалён",
+    "bg_set": "Фон установлен", "bg_removed": "Фон убран",
+    "file_deleted": "Файл удалён", "upload_error": "Ошибка загрузки",
+    "no_mic": "Нет доступа к микрофону"
+  },
+  "sys": {
+    "group_created": "{user} создал группу «{name}»",
+    "user_added": "{admin} добавил {user}",
+    "user_removed": "{admin} удалил {user}"
+  }
+}

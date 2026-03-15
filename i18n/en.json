@@ -1,0 +1,87 @@
+{
+  "app": { "name": "FestMessenger", "tagline": "Secure messenger on your Yandex Disk", "version": "Version" },
+  "auth": {
+    "login": "Sign In", "register": "Register",
+    "username": "Username", "password": "Password",
+    "password_repeat": "Repeat password", "password_new": "New password",
+    "password_placeholder": "at least 4 characters",
+    "password_leave_empty": "leave empty to keep current",
+    "enter": "Sign In", "create_account": "Create account", "logout": "Sign Out",
+    "token_yandex": "Yandex OAuth token", "change_token": "Change token",
+    "token_new": "New token", "token_update": "Update",
+    "how_to_get_token": "How to get token",
+    "checking": "Checking...", "logging_in": "Signing in...", "creating": "Creating account...",
+    "errors": {
+      "fill_all": "Please fill all fields", "username_format": "Username: a-z 0-9 _ (2-20 chars)",
+      "password_short": "Password must be at least 4 characters", "passwords_mismatch": "Passwords do not match",
+      "user_not_found": "User not found", "wrong_password": "Wrong password",
+      "name_taken": "Username already taken", "token_invalid": "Token is invalid"
+    },
+    "success": { "welcome": "Welcome!", "account_created": "Account created!", "token_saved": "Saved!" }
+  },
+  "setup": {
+    "title": "First launch", "subtitle": "Enter your Yandex token",
+    "save_continue": "Save and continue →", "gen_link": "Generate OAuth link", "client_id": "ClientID"
+  },
+  "pin": {
+    "title": "PIN code", "enter": "Enter PIN to unlock", "set_new": "Set new PIN (4 digits)",
+    "repeat": "Repeat PIN", "retry": "Enter PIN again", "logout": "Sign out"
+  },
+  "sidebar": {
+    "online": "online", "search": "Search chats...", "new": "New chat or group",
+    "direct": "Direct", "groups": "Groups", "no_chats": "No chats", "create_hint": "Press + to create a chat"
+  },
+  "chat": {
+    "select": "Select a chat", "select_hint": "or create a new one with +",
+    "placeholder": "Message...", "readonly": "Read only",
+    "load_more": "↑ Load more", "today": "Today", "yesterday": "Yesterday",
+    "typing": "is typing...", "search": "Search in chat...", "members": "members",
+    "pinned": "Pinned", "deleted": "Message deleted", "edited": "edited",
+    "file_deleted": "File deleted", "recording": "Recording... release to send",
+    "no_mic": "No microphone access", "caption": "Caption..."
+  },
+  "preview": { "voice": "🎙 Voice", "photo": "🖼 Photo", "video": "🎬 Video", "file": "📎 File", "empty": "No messages" },
+  "ctx": { "react": "React", "reply": "Reply", "forward": "Forward", "edit": "Edit", "pin": "Pin", "delete_me": "Delete for me", "delete_all": "Delete for everyone" },
+  "modal": {
+    "dm_title": "New chat", "dm_sub": "Select a user",
+    "group_title": "New group", "group_sub": "Name and members",
+    "group_name": "Group name", "group_placeholder": "Family",
+    "rights": "Members and permissions", "read": "read", "write": "write",
+    "fwd_title": "Forward", "fwd_sub": "Select chat",
+    "edit_title": "Edit message", "edit_sub": "Change text",
+    "bg_title": "Chat background", "bg_sub": "Choose or upload", "bg_upload": "Upload image", "bg_remove": "Remove background",
+    "media_title": "Media files", "media_empty": "No files",
+    "save": "Save", "cancel": "Cancel", "close": "Close", "create": "Create", "forward": "Forward", "open": "Open chat"
+  },
+  "new_chat": {
+    "title": "What to create?",
+    "direct": "Direct chat", "direct_sub": "Chat with one person",
+    "group": "Group", "group_sub": "Chat for multiple people"
+  },
+  "settings": {
+    "title": "Settings", "back": "Back",
+    "avatar": "Avatar color", "theme": "Theme", "theme_light": "Light", "theme_dark": "Dark",
+    "security": "Security", "pin": "PIN code", "pin_on": "Enabled", "pin_off": "Disabled",
+    "notifications": "Notifications", "sounds": "Sounds",
+    "account": "Account", "save": "Save changes",
+    "logout": "Sign out", "version": "Version",
+    "token_expires": "Token expires", "token_expired": "⚠️ Token expired! Please renew.",
+    "token_soon": "⚠️ Token expires in {days} days",
+    "support": "Contact developers", "language": "Language",
+    "update_available": "Update available", "update_btn": "Update", "up_to_date": "Up to date",
+    "transport": "Transport"
+  },
+  "poll": { "updated": "updated:", "updating": "updating..." },
+  "toast": {
+    "saved": "Saved", "deleted": "Deleted", "forwarded": "Forwarded", "edited": "Edited",
+    "pin_set": "PIN set", "pin_removed": "PIN removed",
+    "bg_set": "Background set", "bg_removed": "Background removed",
+    "file_deleted": "File deleted", "upload_error": "Upload error",
+    "no_mic": "No microphone access"
+  },
+  "sys": {
+    "group_created": "{user} created group «{name}»",
+    "user_added": "{admin} added {user}",
+    "user_removed": "{admin} removed {user}"
+  }
+}

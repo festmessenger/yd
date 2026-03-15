@@ -1,0 +1,39 @@
+/* FestMessenger — Dark Theme */
+[data-theme="dark"] {
+  --bg: #0d1117;
+  --sidebar: #161b22;
+  --chat-bg: #0d1117;
+  --surface: #1c2128;
+  --surface2: #22272e;
+  --surface3: #2d333b;
+  --border: #373e47;
+  --border2: #444c56;
+
+  /* HIGH CONTRAST TEXT — minimum 7:1 ratio */
+  --text: #e6edf3;
+  --text2: #b1bac4;
+  --text3: #8b949e;
+  --text-on-accent: #ffffff;
+
+  --accent: #4493f8;
+  --accent2: #1f6feb;
+  --accent-light: #0d2149;
+  --accent-text: #79c0ff;
+
+  --green: #3fb950;
+  --red: #f85149;
+  --orange: #d29922;
+  --purple: #bc8cff;
+
+  --me-bg: #1f6feb;
+  --me-text: #ffffff;
+  --them-bg: #1c2128;
+  --them-text: #e6edf3;
+
+  --shadow: 0 2px 12px rgba(0,0,0,.4);
+  --shadow2: 0 8px 32px rgba(0,0,0,.6);
+
+  /* Login page */
+  --login-bg: #1B304C;
+  --login-card-bg: #1c2128;
+}
