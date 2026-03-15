@@ -680,6 +680,17 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
     <div class="auth-logo"><div class="icon">💬</div><h1>FestMessenger</h1><p>Первый запуск — введите токен Яндекса</p></div>
     <div class="field"><label>OAuth токен Яндекса</label><input type="password" id="s-token" placeholder="y0_AgAAAA..."></div>
     <div id="s-msg" class="auth-msg"></div>
+  
+<!-- CORS Notice -->
+<div id="cors-notice" style="display:none;margin-top:14px;padding:12px 14px;background:#fef3c7;border:1px solid #fde68a;border-radius:10px;font-size:12px;color:#92400e;line-height:1.7">
+  <b>⚠️ Требуется CORS прокси</b><br>
+  Вы открыли приложение с GitHub Pages. Для работы нужно развернуть Cloudflare Worker.<br>
+  <a href="https://github.com/festmessenger/yd/blob/main/worker.js" target="_blank" style="color:#92400e;font-weight:700">Инструкция →</a>
+  <br><br>
+  <b>Или запустите локально:</b><br>
+  <code style="background:#fde68a;padding:2px 5px;border-radius:3px">python3 -m http.server 8080</code>
+</div>
+
     <button class="btn btn-primary" onclick="setupToken()" style="margin-top:8px">Сохранить и продолжить →</button>
     <details>
       <summary>Как получить токен</summary>
@@ -1074,28 +1085,47 @@ async function yReq(path, opts={}) {
   return fetch(API+path, {...opts, headers:{ Authorization:`OAuth ${YT}`, 'Content-Type':'application/json', ...(opts.headers||{}) }});
 }
 async function yRead(p) {
-  const r = await yReq(`/resources/download?path=${enc(p)}`);
-  if (!r.ok) return null;
-  const {href} = await r.json();
-  // Try direct first (works locally and on same-origin)
+  const proxyBase = localStorage.getItem('fm_proxy');
+  // If proxy configured - use it (proxy handles Yandex API call internally)
+  if (proxyBase) {
+    try {
+      const r = await fetch(proxyBase + '/read?path=' + enc(p), {
+        headers: { 'X-Yandex-Token': YT }
+      });
+      if (r.ok) return r.json();
+    } catch {}
+  }
+  // Direct approach: get download URL then fetch
   try {
+    const r = await yReq(`/resources/download?path=${enc(p)}`);
+    if (!r.ok) return null;
+    const {href} = await r.json();
     const fr = await fetch(href);
     if (fr.ok) return fr.json();
-  } catch {}
-  // CORS blocked (e.g. GitHub Pages) - use Cloudflare Worker proxy
-  try {
-    const proxy = (localStorage.getItem('fm_proxy') || 'https://yd-proxy.festmessenger.workers.dev')
-      + '/?url=' + encodeURIComponent(href);
-    const fr2 = await fetch(proxy);
-    if (fr2.ok) return fr2.json();
-  } catch {}
+  } catch(e) {
+    // CORS error - can't read file from GitHub Pages without proxy
+    console.warn('yRead CORS blocked for', p, '- configure proxy in Settings');
+  }
   return null;
 }
 async function yWrite(p, data) {
+  const body = typeof data==='string'?data:JSON.stringify(data);
+  const proxyBase = localStorage.getItem('fm_proxy');
+  // If proxy configured - use it
+  if (proxyBase) {
+    try {
+      const r = await fetch(proxyBase + '/write?path=' + enc(p), {
+        method: 'POST',
+        headers: { 'X-Yandex-Token': YT, 'Content-Type': 'application/json' },
+        body
+      });
+      if (r.ok || r.status === 201) return;
+    } catch {}
+  }
+  // Direct: get upload URL then PUT
   const r = await yReq(`/resources/upload?path=${enc(p)}&overwrite=true`);
   if (!r.ok) throw new Error('upload_url '+r.status);
   const {href} = await r.json();
-  const body = typeof data==='string'?data:JSON.stringify(data);
   const wr = await fetch(href,{method:'PUT',body});
   if (!wr.ok && wr.status!==201) throw new Error('write '+wr.status);
 }
@@ -1114,6 +1144,15 @@ async function yWriteBlob(p, blob, onProgress) {
   });
 }
 async function yMkdir(p) {
+  const proxyBase = localStorage.getItem('fm_proxy');
+  if (proxyBase) {
+    try {
+      const r = await fetch(proxyBase + '/mkdir?path=' + enc(p), {
+        method: 'POST', headers: { 'X-Yandex-Token': YT }
+      });
+      return r.ok;
+    } catch {}
+  }
   const r = await yReq(`/resources?path=${enc(p)}`,{method:'PUT'});
   return r.status===201||r.status===409;
 }
@@ -1121,12 +1160,30 @@ async function yDelete(p) {
   await yReq(`/resources?path=${enc(p)}&permanently=true`,{method:'DELETE'});
 }
 async function yList(p) {
+  const proxyBase = localStorage.getItem('fm_proxy');
+  if (proxyBase) {
+    try {
+      const r = await fetch(proxyBase + '/list?path=' + enc(p), {
+        headers: { 'X-Yandex-Token': YT }
+      });
+      if (r.ok) { const d = await r.json(); return d.items||d._embedded?.items||[]; }
+    } catch {}
+  }
   const r = await yReq(`/resources?path=${enc(p)}&limit=1000&sort=created`);
   if (!r.ok) return null;
   const d = await r.json();
   return d._embedded?.items||[];
 }
 async function yDlUrl(p) {
+  const proxyBase = localStorage.getItem('fm_proxy');
+  if (proxyBase) {
+    try {
+      const r = await fetch(proxyBase + '/dlurl?path=' + enc(p), {
+        headers: { 'X-Yandex-Token': YT }
+      });
+      if (r.ok) { const d = await r.json(); return d.href; }
+    } catch {}
+  }
   const r = await yReq(`/resources/download?path=${enc(p)}`);
   if (!r.ok) return null;
   const d = await r.json(); return d.href;
@@ -1206,7 +1263,7 @@ async function init() {
   }
 
   // Ensure dirs (non-blocking for init)
-  ensureDirs().catch(e => console.warn('ensureDirs:', e));
+  ensureDirs().catch(() => {});
 
   const saved = localStorage.getItem('fm_user');
   if (saved) {
@@ -2745,6 +2802,13 @@ document.querySelector('[onclick="openModal(\'modal-group\')"]')?.addEventListen
 // ═══════════════════════════════════════════════════
 //  START
 // ═══════════════════════════════════════════════════
+
+// Detect GitHub Pages and show CORS notice
+if (location.hostname.includes('github.io') || location.hostname.includes('github.com')) {
+  const notice = document.getElementById('cors-notice');
+  if (notice) notice.style.display = 'block';
+}
+
 document.addEventListener("DOMContentLoaded", initIcons);
 init();
 </script>
