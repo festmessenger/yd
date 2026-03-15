@@ -1,0 +1,248 @@
+/* FestMessenger — Theme Registry
+   Each theme exports light + dark variants via [data-theme]
+   Load this file, then set data-theme="light" or "dark" on <html>
+*/
+
+/* ═══════════════════════════════════════
+   THEME: ДЕЛОВОЙ (default)
+   data-style="business"
+═══════════════════════════════════════ */
+[data-style="business"][data-theme="light"] {
+  --bg:#f0f4f8;
+  --sidebar:#ffffff;
+  --chat-bg:#e8ecf1;
+  --surface:#ffffff;
+  --surface2:#f5f7fa;
+  --surface3:#edf0f4;
+  --border:#dde2ea;
+  --border2:#c8cfd9;
+  --text:#0d1117;
+  --text2:#374151;
+  --text3:#6b7280;
+  --accent:#1B304C;
+  --accent2:#243d5e;
+  --accent-light:#e8edf3;
+  --accent-text:#1B304C;
+  --green:#16a34a;
+  --red:#dc2626;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --me-bg:#1B304C;
+  --me-text:#ffffff;
+  --them-bg:#ffffff;
+  --them-text:#0d1117;
+  --login-bg:#1B304C;
+  --shadow:0 1px 8px rgba(0,0,0,.07);
+  --shadow2:0 8px 32px rgba(0,0,0,.12);
+}
+[data-style="business"][data-theme="dark"] {
+  --bg:#0a0d11;
+  --sidebar:#111519;
+  --chat-bg:#0a0d11;
+  --surface:#161b22;
+  --surface2:#1c2128;
+  --surface3:#21262d;
+  --border:#30363d;
+  --border2:#444c56;
+  --text:#e6edf3;
+  --text2:#b1bac4;
+  --text3:#8b949e;
+  --accent:#4493f8;
+  --accent2:#1f6feb;
+  --accent-light:#0d2149;
+  --accent-text:#79c0ff;
+  --green:#3fb950;
+  --red:#f85149;
+  --orange:#d29922;
+  --purple:#bc8cff;
+  --me-bg:#1f6feb;
+  --me-text:#ffffff;
+  --them-bg:#161b22;
+  --them-text:#e6edf3;
+  --login-bg:#0a0d11;
+  --shadow:0 1px 8px rgba(0,0,0,.4);
+  --shadow2:0 8px 32px rgba(0,0,0,.6);
+}
+
+/* ═══════════════════════════════════════
+   THEME: ТЁПЛЫЙ
+   data-style="warm"
+═══════════════════════════════════════ */
+[data-style="warm"][data-theme="light"] {
+  --bg:#fdf8f3;
+  --sidebar:#ffffff;
+  --chat-bg:#f5ede3;
+  --surface:#ffffff;
+  --surface2:#fdf6ef;
+  --surface3:#faeee3;
+  --border:#e8d5c0;
+  --border2:#d4b896;
+  --text:#1c1007;
+  --text2:#4a3728;
+  --text3:#8a6e58;
+  --accent:#c2680a;
+  --accent2:#a85908;
+  --accent-light:#fef3e2;
+  --accent-text:#7c4306;
+  --green:#15803d;
+  --red:#b91c1c;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --me-bg:#c2680a;
+  --me-text:#ffffff;
+  --them-bg:#ffffff;
+  --them-text:#1c1007;
+  --login-bg:#2d1a0a;
+  --shadow:0 1px 8px rgba(80,40,0,.08);
+  --shadow2:0 8px 32px rgba(80,40,0,.14);
+}
+[data-style="warm"][data-theme="dark"] {
+  --bg:#110b04;
+  --sidebar:#1a1007;
+  --chat-bg:#110b04;
+  --surface:#1f1409;
+  --surface2:#261a0e;
+  --surface3:#2e2013;
+  --border:#3d2e1e;
+  --border2:#5a4330;
+  --text:#f5e6d3;
+  --text2:#c9a882;
+  --text3:#8a6e58;
+  --accent:#f59e0b;
+  --accent2:#d97706;
+  --accent-light:#2d1a06;
+  --accent-text:#fcd34d;
+  --green:#4ade80;
+  --red:#f87171;
+  --orange:#fbbf24;
+  --purple:#a78bfa;
+  --me-bg:#d97706;
+  --me-text:#ffffff;
+  --them-bg:#1f1409;
+  --them-text:#f5e6d3;
+  --login-bg:#110b04;
+  --shadow:0 1px 8px rgba(0,0,0,.5);
+  --shadow2:0 8px 32px rgba(0,0,0,.7);
+}
+
+/* ═══════════════════════════════════════
+   THEME: ТЁМНЫЙ ТЕХ
+   data-style="darktech"
+═══════════════════════════════════════ */
+[data-style="darktech"][data-theme="light"] {
+  --bg:#f5f3ff;
+  --sidebar:#ffffff;
+  --chat-bg:#ede9fe;
+  --surface:#ffffff;
+  --surface2:#f5f3ff;
+  --surface3:#ede9fe;
+  --border:#ddd6fe;
+  --border2:#c4b5fd;
+  --text:#0f0a1e;
+  --text2:#3b2f6e;
+  --text3:#7c6faa;
+  --accent:#7c3aed;
+  --accent2:#6d28d9;
+  --accent-light:#ede9fe;
+  --accent-text:#4c1d95;
+  --green:#15803d;
+  --red:#b91c1c;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --me-bg:#7c3aed;
+  --me-text:#ffffff;
+  --them-bg:#ffffff;
+  --them-text:#0f0a1e;
+  --login-bg:#0f0a1e;
+  --shadow:0 1px 8px rgba(60,20,120,.08);
+  --shadow2:0 8px 32px rgba(60,20,120,.15);
+}
+[data-style="darktech"][data-theme="dark"] {
+  --bg:#09070f;
+  --sidebar:#0f0c18;
+  --chat-bg:#09070f;
+  --surface:#13101f;
+  --surface2:#1a1628;
+  --surface3:#201c30;
+  --border:#2e2845;
+  --border2:#443d62;
+  --text:#e9e4ff;
+  --text2:#b3acdf;
+  --text3:#7a739e;
+  --accent:#a78bfa;
+  --accent2:#8b5cf6;
+  --accent-light:#1e1535;
+  --accent-text:#ddd6fe;
+  --green:#4ade80;
+  --red:#f87171;
+  --orange:#fbbf24;
+  --purple:#c4b5fd;
+  --me-bg:#7c3aed;
+  --me-text:#ffffff;
+  --them-bg:#13101f;
+  --them-text:#e9e4ff;
+  --login-bg:#09070f;
+  --shadow:0 1px 8px rgba(0,0,0,.5);
+  --shadow2:0 8px 32px rgba(0,0,0,.7);
+}
+
+/* ═══════════════════════════════════════
+   THEME: БИРЮЗОВЫЙ
+   data-style="teal"
+═══════════════════════════════════════ */
+[data-style="teal"][data-theme="light"] {
+  --bg:#f0fdfa;
+  --sidebar:#ffffff;
+  --chat-bg:#e6faf6;
+  --surface:#ffffff;
+  --surface2:#f0fdfa;
+  --surface3:#ccfbf1;
+  --border:#99f6e4;
+  --border2:#5eead4;
+  --text:#042f2e;
+  --text2:#134e4a;
+  --text3:#2f877f;
+  --accent:#0d9488;
+  --accent2:#0f766e;
+  --accent-light:#ccfbf1;
+  --accent-text:#0f766e;
+  --green:#15803d;
+  --red:#b91c1c;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --me-bg:#0d9488;
+  --me-text:#ffffff;
+  --them-bg:#ffffff;
+  --them-text:#042f2e;
+  --login-bg:#042f2e;
+  --shadow:0 1px 8px rgba(0,80,70,.07);
+  --shadow2:0 8px 32px rgba(0,80,70,.12);
+}
+[data-style="teal"][data-theme="dark"] {
+  --bg:#020f0e;
+  --sidebar:#051a18;
+  --chat-bg:#020f0e;
+  --surface:#07201e;
+  --surface2:#0c2d2a;
+  --surface3:#113835;
+  --border:#1a4f4b;
+  --border2:#267370;
+  --text:#e0faf7;
+  --text2:#80d8d0;
+  --text3:#3d9e98;
+  --accent:#2dd4bf;
+  --accent2:#14b8a6;
+  --accent-light:#0c2d2a;
+  --accent-text:#99f6e4;
+  --green:#4ade80;
+  --red:#f87171;
+  --orange:#fbbf24;
+  --purple:#a78bfa;
+  --me-bg:#0d9488;
+  --me-text:#ffffff;
+  --them-bg:#07201e;
+  --them-text:#e0faf7;
+  --login-bg:#020f0e;
+  --shadow:0 1px 8px rgba(0,0,0,.5);
+  --shadow2:0 8px 32px rgba(0,0,0,.7);
+}

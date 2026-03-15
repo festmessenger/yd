@@ -96,7 +96,7 @@ details summary{font-size:12px;color:var(--text3);cursor:pointer;font-weight:600
   .sidebar.open{transform:translateX(0);box-shadow:4px 0 24px rgba(0,0,0,.18)}
   .sidebar-overlay{display:block !important}
 }
-.sidebar-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:99;backdrop-filter:blur(2px)}
+.sidebar-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:99}
 
 /* ═══ SIDEBAR ═══ */
 .sidebar-header{padding:14px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
@@ -200,7 +200,7 @@ details summary{font-size:12px;color:var(--text3);cursor:pointer;font-weight:600
 .ctx-item{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text);transition:.15s}
 .ctx-item:hover{background:var(--surface3)}
 .ctx-item.danger{color:var(--red)}
-.ctx-item .ci-ic{font-size:16px;width:20px;text-align:center}
+.ctx-item .ci-ic{display:flex;align-items:center;justify-content:center;width:16px;height:16px;flex-shrink:0;color:var(--accent)}
 .ctx-sep{height:1px;background:var(--border);margin:4px 0}
 /* emoji picker for reactions */
 .react-picker{position:fixed;background:var(--surface);border-radius:14px;box-shadow:var(--shadow2);padding:8px;z-index:501;display:none;gap:4px;border:1px solid var(--border)}
@@ -293,7 +293,7 @@ input[type=file]{display:none}
 .profile-av-name{font-size:16px;font-weight:800}
 
 /* ═══ MODAL ═══ */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:400;backdrop-filter:blur(4px);padding:16px}
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:400;padding:16px;-webkit-overflow-scrolling:touch}
 .modal-ov.open{display:flex}
 .modal{background:var(--surface);border-radius:20px;padding:24px;width:min(380px,100%);max-height:90vh;overflow-y:auto;box-shadow:var(--shadow2)}
 .modal h3{font-size:16px;font-weight:800;margin-bottom:3px}
@@ -332,6 +332,34 @@ input[type=file]{display:none}
 .search-nav{display:flex;gap:4px;align-items:center;font-size:12px;color:var(--text3)}
 msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
 
+
+
+/* ── message action button ── */
+.msg-block{position:relative}
+.msg-actions{position:absolute;top:2px;display:flex;gap:2px;opacity:0;transition:opacity .15s;z-index:10}
+.mr.me .msg-actions{left:-68px}
+.mr.them .msg-actions{right:-68px}
+.mr:hover .msg-actions{opacity:1}
+.msg-act-btn{width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text3);box-shadow:var(--shadow);transition:.15s}
+.msg-act-btn:hover{background:var(--surface3);color:var(--text)}
+@media(max-width:680px){
+  .msg-actions{opacity:1;position:static;justify-content:flex-end;margin-top:3px}
+  .mr.me .msg-actions{left:auto}
+  .mr.them .msg-actions{right:auto}
+}
+
+/* ── reaction rows ── */
+.react-row{display:flex;margin:0 0 2px 0;padding:0}
+.react-row.me{justify-content:flex-end;padding-right:8px}
+.react-row.them{justify-content:flex-start;padding-left:32px}
+.rpill{display:flex;align-items:center;gap:2px;padding:2px 7px;background:var(--surface);border-radius:12px;font-size:12px;cursor:pointer;border:1.5px solid var(--border);transition:.15s;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.rpill:hover{border-color:var(--accent)}
+.rpill.mine{border-color:var(--accent);background:var(--accent-light)}
+.rpill .re{font-size:13px}.rpill .rn{font-size:10px;color:var(--text3);font-weight:600}
+
+
+[data-theme="dark"] .settings-row-logout{background:#2a0d0d!important;border-color:#4a1a1a!important}
+
 /* ═══ SCROLLBAR ═══ */
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 
@@ -341,6 +369,258 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
 
 /* ═══ FORWARD MODAL ═══ */
 #fwd-modal .fwd-list{max-height:250px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--rsm);margin-bottom:12px}
+
+/* ── THEMES ── */
+/* FestMessenger — Theme Registry
+   Each theme exports light + dark variants via [data-theme]
+   Load this file, then set data-theme="light" or "dark" on <html>
+*/
+
+/* ═══════════════════════════════════════
+   THEME: ДЕЛОВОЙ (default)
+   data-style="business"
+═══════════════════════════════════════ */
+[data-style="business"][data-theme="light"] {
+  --bg:#f0f4f8;
+  --sidebar:#ffffff;
+  --chat-bg:#e8ecf1;
+  --surface:#ffffff;
+  --surface2:#f5f7fa;
+  --surface3:#edf0f4;
+  --border:#dde2ea;
+  --border2:#c8cfd9;
+  --text:#0d1117;
+  --text2:#374151;
+  --text3:#6b7280;
+  --accent:#1B304C;
+  --accent2:#243d5e;
+  --accent-light:#e8edf3;
+  --accent-text:#1B304C;
+  --green:#16a34a;
+  --red:#dc2626;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --me-bg:#1B304C;
+  --me-text:#ffffff;
+  --them-bg:#ffffff;
+  --them-text:#0d1117;
+  --login-bg:#1B304C;
+  --shadow:0 1px 8px rgba(0,0,0,.07);
+  --shadow2:0 8px 32px rgba(0,0,0,.12);
+}
+[data-style="business"][data-theme="dark"] {
+  --bg:#0a0d11;
+  --sidebar:#111519;
+  --chat-bg:#0a0d11;
+  --surface:#161b22;
+  --surface2:#1c2128;
+  --surface3:#21262d;
+  --border:#30363d;
+  --border2:#444c56;
+  --text:#e6edf3;
+  --text2:#b1bac4;
+  --text3:#8b949e;
+  --accent:#4493f8;
+  --accent2:#1f6feb;
+  --accent-light:#0d2149;
+  --accent-text:#79c0ff;
+  --green:#3fb950;
+  --red:#f85149;
+  --orange:#d29922;
+  --purple:#bc8cff;
+  --me-bg:#1f6feb;
+  --me-text:#ffffff;
+  --them-bg:#161b22;
+  --them-text:#e6edf3;
+  --login-bg:#0a0d11;
+  --shadow:0 1px 8px rgba(0,0,0,.4);
+  --shadow2:0 8px 32px rgba(0,0,0,.6);
+}
+
+/* ═══════════════════════════════════════
+   THEME: ТЁПЛЫЙ
+   data-style="warm"
+═══════════════════════════════════════ */
+[data-style="warm"][data-theme="light"] {
+  --bg:#fdf8f3;
+  --sidebar:#ffffff;
+  --chat-bg:#f5ede3;
+  --surface:#ffffff;
+  --surface2:#fdf6ef;
+  --surface3:#faeee3;
+  --border:#e8d5c0;
+  --border2:#d4b896;
+  --text:#1c1007;
+  --text2:#4a3728;
+  --text3:#8a6e58;
+  --accent:#c2680a;
+  --accent2:#a85908;
+  --accent-light:#fef3e2;
+  --accent-text:#7c4306;
+  --green:#15803d;
+  --red:#b91c1c;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --me-bg:#c2680a;
+  --me-text:#ffffff;
+  --them-bg:#ffffff;
+  --them-text:#1c1007;
+  --login-bg:#2d1a0a;
+  --shadow:0 1px 8px rgba(80,40,0,.08);
+  --shadow2:0 8px 32px rgba(80,40,0,.14);
+}
+[data-style="warm"][data-theme="dark"] {
+  --bg:#110b04;
+  --sidebar:#1a1007;
+  --chat-bg:#110b04;
+  --surface:#1f1409;
+  --surface2:#261a0e;
+  --surface3:#2e2013;
+  --border:#3d2e1e;
+  --border2:#5a4330;
+  --text:#f5e6d3;
+  --text2:#c9a882;
+  --text3:#8a6e58;
+  --accent:#f59e0b;
+  --accent2:#d97706;
+  --accent-light:#2d1a06;
+  --accent-text:#fcd34d;
+  --green:#4ade80;
+  --red:#f87171;
+  --orange:#fbbf24;
+  --purple:#a78bfa;
+  --me-bg:#d97706;
+  --me-text:#ffffff;
+  --them-bg:#1f1409;
+  --them-text:#f5e6d3;
+  --login-bg:#110b04;
+  --shadow:0 1px 8px rgba(0,0,0,.5);
+  --shadow2:0 8px 32px rgba(0,0,0,.7);
+}
+
+/* ═══════════════════════════════════════
+   THEME: ТЁМНЫЙ ТЕХ
+   data-style="darktech"
+═══════════════════════════════════════ */
+[data-style="darktech"][data-theme="light"] {
+  --bg:#f5f3ff;
+  --sidebar:#ffffff;
+  --chat-bg:#ede9fe;
+  --surface:#ffffff;
+  --surface2:#f5f3ff;
+  --surface3:#ede9fe;
+  --border:#ddd6fe;
+  --border2:#c4b5fd;
+  --text:#0f0a1e;
+  --text2:#3b2f6e;
+  --text3:#7c6faa;
+  --accent:#7c3aed;
+  --accent2:#6d28d9;
+  --accent-light:#ede9fe;
+  --accent-text:#4c1d95;
+  --green:#15803d;
+  --red:#b91c1c;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --me-bg:#7c3aed;
+  --me-text:#ffffff;
+  --them-bg:#ffffff;
+  --them-text:#0f0a1e;
+  --login-bg:#0f0a1e;
+  --shadow:0 1px 8px rgba(60,20,120,.08);
+  --shadow2:0 8px 32px rgba(60,20,120,.15);
+}
+[data-style="darktech"][data-theme="dark"] {
+  --bg:#09070f;
+  --sidebar:#0f0c18;
+  --chat-bg:#09070f;
+  --surface:#13101f;
+  --surface2:#1a1628;
+  --surface3:#201c30;
+  --border:#2e2845;
+  --border2:#443d62;
+  --text:#e9e4ff;
+  --text2:#b3acdf;
+  --text3:#7a739e;
+  --accent:#a78bfa;
+  --accent2:#8b5cf6;
+  --accent-light:#1e1535;
+  --accent-text:#ddd6fe;
+  --green:#4ade80;
+  --red:#f87171;
+  --orange:#fbbf24;
+  --purple:#c4b5fd;
+  --me-bg:#7c3aed;
+  --me-text:#ffffff;
+  --them-bg:#13101f;
+  --them-text:#e9e4ff;
+  --login-bg:#09070f;
+  --shadow:0 1px 8px rgba(0,0,0,.5);
+  --shadow2:0 8px 32px rgba(0,0,0,.7);
+}
+
+/* ═══════════════════════════════════════
+   THEME: БИРЮЗОВЫЙ
+   data-style="teal"
+═══════════════════════════════════════ */
+[data-style="teal"][data-theme="light"] {
+  --bg:#f0fdfa;
+  --sidebar:#ffffff;
+  --chat-bg:#e6faf6;
+  --surface:#ffffff;
+  --surface2:#f0fdfa;
+  --surface3:#ccfbf1;
+  --border:#99f6e4;
+  --border2:#5eead4;
+  --text:#042f2e;
+  --text2:#134e4a;
+  --text3:#2f877f;
+  --accent:#0d9488;
+  --accent2:#0f766e;
+  --accent-light:#ccfbf1;
+  --accent-text:#0f766e;
+  --green:#15803d;
+  --red:#b91c1c;
+  --orange:#d97706;
+  --purple:#7c3aed;
+  --me-bg:#0d9488;
+  --me-text:#ffffff;
+  --them-bg:#ffffff;
+  --them-text:#042f2e;
+  --login-bg:#042f2e;
+  --shadow:0 1px 8px rgba(0,80,70,.07);
+  --shadow2:0 8px 32px rgba(0,80,70,.12);
+}
+[data-style="teal"][data-theme="dark"] {
+  --bg:#020f0e;
+  --sidebar:#051a18;
+  --chat-bg:#020f0e;
+  --surface:#07201e;
+  --surface2:#0c2d2a;
+  --surface3:#113835;
+  --border:#1a4f4b;
+  --border2:#267370;
+  --text:#e0faf7;
+  --text2:#80d8d0;
+  --text3:#3d9e98;
+  --accent:#2dd4bf;
+  --accent2:#14b8a6;
+  --accent-light:#0c2d2a;
+  --accent-text:#99f6e4;
+  --green:#4ade80;
+  --red:#f87171;
+  --orange:#fbbf24;
+  --purple:#a78bfa;
+  --me-bg:#0d9488;
+  --me-text:#ffffff;
+  --them-bg:#07201e;
+  --them-text:#e0faf7;
+  --login-bg:#020f0e;
+  --shadow:0 1px 8px rgba(0,0,0,.5);
+  --shadow2:0 8px 32px rgba(0,0,0,.7);
+}
+
+/* ── END THEMES ── */
 </style>
 </head>
 <body>
@@ -467,7 +747,7 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
         <div class="uname" id="my-name">—</div>
         <div class="ustatus" id="my-status">онлайн</div>
       </div>
-      <button class="icon-btn" title="Новый чат" onclick="openNewDM()">✏️</button>
+      <button class="icon-btn" title="Новый чат" onclick="openNewDM()" id="btn-new-chat">✏️</button>
       <button class="icon-btn" title="Новая группа" onclick="openNewGroup()">👥</button>
       <button class="icon-btn" title="Настройки" onclick="openSettings()">⚙️</button>
     </div>
@@ -484,7 +764,7 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
     <!-- SETTINGS PANEL -->
     <div class="settings-panel" id="settings-panel">
       <div class="settings-header">
-        <button onclick="closeSettings()" style="display:flex;align-items:center;gap:6px;padding:7px 12px;border:1.5px solid var(--border);border-radius:10px;background:var(--surface2);cursor:pointer;font-size:13px;font-weight:600;color:var(--text2);font-family:var(--font)">← Назад</button>
+        <button onclick="closeSettings()" style="display:flex;align-items:center;gap:6px;padding:7px 12px;border:1.5px solid var(--border);border-radius:10px;background:var(--surface2);cursor:pointer;font-size:13px;font-weight:600;color:var(--text2);font-family:var(--font)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Назад</button>
         <h2>Настройки</h2>
       </div>
       <div class="settings-body" id="settings-body"></div>
@@ -500,7 +780,7 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
     <!-- ACTIVE CHAT -->
     <div id="active-chat" style="display:none;flex-direction:column;flex:1;overflow:hidden;min-height:0">
       <div class="chat-header">
-        <button class="hamburger" onclick="openSidebar()">☰</button>
+        <button class="hamburger" id="btn-hamburger" onclick="openSidebar()">☰</button>
         <div class="ch-av" id="ch-av" onclick="onChatAvatarClick()">?</div>
         <div class="ch-info">
           <div class="ch-name" id="ch-name">—</div>
@@ -553,20 +833,37 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
       <!-- input -->
       <div class="input-area" style="position:relative">
         <div class="mention-list" id="mention-list"></div>
-        <button class="file-btn" onclick="document.getElementById('fi').click()">📎</button>
+        <button class="file-btn" onclick="document.getElementById('fi').click()" data-icon='attach'>📎</button>
         <input type="file" id="fi" multiple onchange="handleFiles(this)">
         <div class="input-box" id="msg-input" contenteditable="true" data-ph="Сообщение..."
           oninput="onInput()" onkeydown="onKeydown(event)"></div>
-        <button class="ptt-btn" id="ptt-btn"
-          onmousedown="startPTT()" onmouseup="stopPTT()"
-          ontouchstart="startPTT(event)" ontouchend="stopPTT(event)">🎙</button>
-        <button class="send-btn" id="send-btn" onclick="sendText()" disabled>➤</button>
+        <button class="ptt-btn" id="ptt-btn" onclick="togglePTT()" title="Голосовое сообщение" data-icon="mic"></button>
+        <button class="ptt-cancel" id="ptt-cancel" onclick="cancelPTT()" style="display:none;width:38px;height:38px;border-radius:50%;border:none;background:var(--surface3);color:var(--text3);cursor:pointer;font-size:18px;flex-shrink:0" title="Отмена">✕</button>
+        <button class="send-btn" id="send-btn" onclick="sendText()" disabled data-icon="send"></button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- MODALS -->
+<!-- NEW CHAT PICKER -->
+<div class="modal-ov" id="modal-newchat">
+  <div class="modal">
+    <h3>Создать</h3><p class="msub">Выберите тип</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin:14px 0">
+      <div onclick="closeModal('modal-newchat');openNewDM()" style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;border:2px solid var(--border);cursor:pointer;background:var(--surface2);transition:.15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:26px;width:46px;height:46px;background:var(--surface3);border-radius:12px;display:flex;align-items:center;justify-content:center">💬</div>
+        <div><div style="font-size:14px;font-weight:700;color:var(--text)">Личный чат</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Переписка с одним пользователем</div></div>
+      </div>
+      <div onclick="closeModal('modal-newchat');openNewGroup()" style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;border:2px solid var(--border);cursor:pointer;background:var(--surface2);transition:.15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:26px;width:46px;height:46px;background:var(--surface3);border-radius:12px;display:flex;align-items:center;justify-content:center">👥</div>
+        <div><div style="font-size:14px;font-weight:700;color:var(--text)">Группа</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Чат для нескольких участников</div></div>
+      </div>
+    </div>
+    <button class="btn btn-secondary" onclick="closeModal('modal-newchat')" style="font-size:13px">Отмена</button>
+  </div>
+</div>
+
 <div class="modal-ov" id="modal-dm">
   <div class="modal">
     <h3>💬 Новый личный чат</h3><p class="msub">Выберите пользователя</p>
@@ -629,6 +926,73 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
 </div>
 <script>
 'use strict';
+/* ── ICONS ── */
+/* FestMessenger Icons — Linear style, 1.75px stroke, round caps
+   All icons are SVG strings, viewBox 0 0 24 24
+   Usage: el.innerHTML = IC.send  or  el.innerHTML = icon('send', 20)
+*/
+'use strict';
+
+const IC = {
+  // ── Navigation & Actions ──
+  plus:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
+  back:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`,
+  close:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+  more:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>`,
+  moreH:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>`,
+  send:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`,
+  search:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+  settings: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+  info:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+  menu:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`,
+  logout:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>`,
+
+  // ── Chat ──
+  chat:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  group:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  reply:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>`,
+  forward:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg>`,
+  pin:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>`,
+  edit:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
+  delete:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>`,
+  react:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`,
+  attach:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>`,
+  mic:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`,
+  play:     `<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+  pause:    `<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`,
+  download: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+  save:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>`,
+  media:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`,
+
+  // ── Settings ──
+  sun:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+  moon:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+  lock:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  bell:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
+  bellOff:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18.63 13A17.89 17.89 0 0 1 18 8"/><path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"/><path d="M18 8a6 6 0 0 0-9.33-5"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`,
+  palette:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
+  globe:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  user:     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  key:      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>`,
+  support:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="12" y1="7" x2="12" y2="13"/></svg>`,
+  about:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+  check:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+  checkDbl: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 6 9 17 4 12"/><polyline points="23 6 14 17"/></svg>`,
+  update:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`,
+  unpin:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><path d="M10.59 10.59A2 2 0 0 0 8 13l-2 5 5-2a2 2 0 0 0 2.41-2.59"/><path d="M13.73 6.27A2 2 0 0 1 16 4l2 2a2 2 0 0 1-2.27 2.27"/></svg>`,
+};
+
+// Helper: render icon with custom size
+function icon(name, size=18) {
+  const svg = IC[name];
+  if (!svg) return '';
+  return svg.replace('<svg ', `<svg width="${size}" height="${size}" `);
+}
+
+window.IC = IC;
+window.icon = icon;
+
+/* ── END ICONS ── */
 // ═══════════════════════════════════════════════════
 //  CONSTANTS
 // ═══════════════════════════════════════════════════
@@ -740,27 +1104,84 @@ const enc = encodeURIComponent;
 // ═══════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════
+
+function initIcons() {
+  if (typeof IC === 'undefined') return;
+  const sz = (n,s=18) => IC[n] ? IC[n].replace('<svg ', `<svg width="${s}" height="${s}" `) : '';
+  // Named ID buttons
+  const map = {
+    'btn-new-chat':     'plus',
+    'btn-settings':     'settings', 
+    'btn-search-chat':  'search',
+    'btn-chat-info':    'info',
+    'btn-hamburger':    'menu',
+  };
+  for (const [id, name] of Object.entries(map)) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = sz(name);
+  }
+  // data-icon attribute buttons
+  document.querySelectorAll('[data-icon]').forEach(el => {
+    const n = el.dataset.icon;
+    if (IC[n]) el.innerHTML = sz(n);
+  });
+  // Pin button
+  const pinBtn = document.getElementById('pin-btn');
+  if (pinBtn && !pinBtn.innerHTML.trim()) pinBtn.innerHTML = sz('pin');
+  // Style
+  const style = localStorage.getItem('fm_style') || 'business';
+  document.documentElement.setAttribute('data-style', style);
+}
+
 async function init() {
+  initIcons();
+  // Apply cached theme immediately to avoid flash
+  const cachedTheme = localStorage.getItem('fm_theme') || 'light';
+  applyTheme(cachedTheme);
+
   YT = localStorage.getItem('yad_token')||'';
   if (!YT) { showScreen('setup'); return; }
-  // Validate
-  const r = await fetch('https://login.yandex.ru/info?format=json',{headers:{Authorization:`OAuth ${YT}`}});
-  if (!r.ok) { showScreen('setup'); return; }
-  await ensureDirs();
-  const saved = localStorage.getItem('fc_user');
+
+  // Validate token with timeout
+  try {
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 8000);
+    const r = await fetch('https://login.yandex.ru/info?format=json', {
+      headers: {Authorization: `OAuth ${YT}`},
+      signal: ctrl.signal
+    });
+    clearTimeout(tid);
+    if (!r.ok) { localStorage.removeItem('yad_token'); showScreen('setup'); return; }
+  } catch(e) {
+    // Network error or timeout - if we have cached user, try to show auth
+    console.warn('Token check failed:', e.message);
+    showScreen('auth');
+    return;
+  }
+
+  // Ensure dirs (non-blocking for init)
+  ensureDirs().catch(e => console.warn('ensureDirs:', e));
+
+  const saved = localStorage.getItem('fm_user');
   if (saved) {
     try {
       const u = JSON.parse(saved);
-      const profile = await yRead(`${ROOT}/users/${u.name}/profile.json`);
+      // Try to load profile, but don't block on it
+      const profilePromise = yRead(`${ROOT}/users/${u.name}/profile.json`);
+      const profile = await Promise.race([
+        profilePromise,
+        new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 6000))
+      ]);
       if (profile) {
         CU = profile;
         applyTheme(profile.theme||'light');
-        // PIN check
         if (profile.pin) { showPinVerify(); return; }
         enterApp();
         return;
       }
-    } catch{}
+    } catch(e) {
+      console.warn('Profile load failed:', e.message);
+    }
   }
   showScreen('auth');
 }
@@ -1166,7 +1587,10 @@ function renderMsgs(preserve=false) {
       s.className='sys-msg'; s.textContent=m.text;
       wrap.appendChild(s);
     } else {
-      wrap.appendChild(buildMsg(m));
+      const el = buildMsg(m);
+      wrap.appendChild(el);
+      // Append reaction row right after message row
+      if (el._reactRow) wrap.appendChild(el._reactRow);
     }
   });
 }
@@ -1184,17 +1608,30 @@ function buildMsg(m) {
   const sender=(activeChat.meta.type==='group'&&!isMe)?`<div class="msg-sender" style="color:${userColor(m.from)}">${esc(m.from)}</div>`:'';
   const replyHtml=m.replyTo?buildReply(m.replyTo):'';
   const content=buildContent(m,isMe);
-  const reactions=buildReactions(m,isMe);
   const time=fmtTime(m.time);
   const edited=m.edited?'edited':'';
   const status=isMe?`<span class="msg-st">${m.read?'✓✓':'✓'}</span>`:'';
+  const actBtns=!m.deleted?`<div class="msg-actions">
+    <button class="msg-act-btn" onclick="setReply('${m.id}')" title="Ответить">↩</button>
+    <button class="msg-act-btn" onclick="showCtxBtn(event,'${m.id}')" title="Ещё">···</button>
+  </div>`:'';
   row.innerHTML=`${av}<div class="msg-block">${sender}
     <div class="bubble ${edited}" id="bub_${m.id}" oncontextmenu="showCtx(event,'${m.id}')" ondblclick="setReply('${m.id}')">
       ${replyHtml}${content}
       <div class="msg-meta"><span class="msg-time">${time}</span>${status}</div>
     </div>
-    ${reactions}
+    ${actBtns}
   </div>`;
+  // Reactions as separate sibling row — no visual overlap with bubble
+  const reactH = buildReactions(m, isMe);
+  if (reactH) {
+    const rrow = document.createElement('div');
+    rrow.className = 'react-row ' + (isMe ? 'me' : 'them');
+    rrow.dataset.for = m.id;
+    rrow.innerHTML = reactH;
+    // We return row now, parent appends it, then we append rrow after
+    row._reactRow = rrow;
+  }
   return row;
 }
 function buildReply(rid) {
@@ -1293,21 +1730,59 @@ function showCtx(e, msgId) {
   const isMe=m.from===CU.name;
   const canEdit=isMe&&m.type==='text'&&(Date.now()-m.time)<EDIT_TTL;
   const isGrp=activeChat.meta.type==='group';
+  const hasFile = ['image','video','file','voice'].includes(m.type) && m.fileUrl && !isMe;
   let items=`
-    <div class="ctx-item" onclick="ctxReact()"><span class="ci-ic">😊</span>Реакция</div>
-    <div class="ctx-item" onclick="setReply('${msgId}')"><span class="ci-ic">↩</span>Ответить</div>
-    <div class="ctx-item" onclick="ctxFwd()"><span class="ci-ic">↪</span>Переслать</div>`;
-  if (canEdit) items+=`<div class="ctx-item" onclick="ctxEdit()"><span class="ci-ic">✏️</span>Редактировать</div>`;
-  if (isGrp&&isMe) items+=`<div class="ctx-sep"></div><div class="ctx-item" onclick="pinMsg('${msgId}')"><span class="ci-ic">📌</span>Закрепить</div>`;
+    <div class="ctx-item" onclick="ctxReact()"><span class="ci-ic" data-ic="react"></span>Реакция</div>
+    <div class="ctx-item" onclick="setReply('${msgId}')"><span class="ci-ic" data-ic="reply"></span>Ответить</div>
+    <div class="ctx-item" onclick="ctxFwd()"><span class="ci-ic" data-ic="forward"></span>Переслать</div>`;
+  if (hasFile) items += `<div class="ctx-item" onclick="saveToMyDisk('${msgId}')"><span class="ci-ic" data-ic="save"></span>Сохранить на диск</div>`;
+  if (canEdit) items+=`<div class="ctx-item" onclick="ctxEdit()"><span class="ci-ic" data-ic="edit"></span>Редактировать</div>`;
+  if (isGrp&&isMe) items+=`<div class="ctx-sep"></div><div class="ctx-item" onclick="pinMsg('${msgId}')"><span class="ci-ic" data-ic="pin"></span>Закрепить</div>`;
   if (isMe) items+=`<div class="ctx-sep"></div>
-    <div class="ctx-item danger" onclick="ctxDelete('me')"><span class="ci-ic">🗑</span>Удалить у себя</div>
-    <div class="ctx-item danger" onclick="ctxDelete('all')"><span class="ci-ic">🗑</span>Удалить у всех</div>`;
+    <div class="ctx-item danger" onclick="ctxDelete('me')"><span class="ci-ic" data-ic="delete"></span>Удалить у себя</div>
+    <div class="ctx-item danger" onclick="ctxDelete('all')"><span class="ci-ic" data-ic="delete"></span>Удалить у всех</div>`;
   const menu=document.getElementById('ctx-menu');
   menu.innerHTML=items;
   menu.style.left=Math.min(e.clientX, window.innerWidth-200)+'px';
   menu.style.top=Math.min(e.clientY, window.innerHeight-200)+'px';
   menu.classList.add('open');
+
+  // Populate SVG icons in menu items
+  menu.querySelectorAll('[data-ic]').forEach(el => {
+    const n = el.dataset.ic;
+    if (typeof IC !== 'undefined' && IC[n])
+      el.innerHTML = IC[n].replace('<svg ','<svg width="16" height="16" ');
+  });
 }
+function showCtxBtn(e, msgId) {
+  e.stopPropagation();
+  // Position menu near the button
+  const btn = e.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  const fakeEvent = { preventDefault: ()=>{}, clientX: rect.left, clientY: rect.bottom + 4, target: btn };
+  showCtx(fakeEvent, msgId);
+}
+
+async function saveToMyDisk(msgId) {
+  closeCtx();
+  const m = msgs.find(x => x.id === msgId);
+  if (!m || !m.fileUrl) return;
+  toast('Скачиваю файл...');
+  try {
+    const resp = await fetch(m.fileUrl);
+    const blob = await resp.blob();
+    const ext = m.fileName ? '' : (m.type === 'voice' ? '.webm' : '');
+    const fname = m.fileName || `${m.type}_${m.time}${ext}`;
+    const safeName = fname.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const diskPath = `${ROOT}/users/${CU.name}/saved/${safeName}`;
+    await yMkdir(`${ROOT}/users/${CU.name}/saved`);
+    await yWriteBlob(diskPath, blob);
+    toast('✅ Сохранено на диск: /BypassChat/users/' + CU.name + '/saved/' + safeName);
+  } catch(e) {
+    toast('Ошибка сохранения: ' + e.message);
+  }
+}
+
 function closeCtx() { document.getElementById('ctx-menu').classList.remove('open'); document.getElementById('react-picker').classList.remove('open'); }
 document.addEventListener('click', e=>{ if (!e.target.closest('#ctx-menu')&&!e.target.closest('.bubble')) closeCtx(); });
 
@@ -1394,7 +1869,22 @@ async function toggleReact(msgId, emoji) {
   else m.reactions[CU.name]=emoji;
   await saveDayMsgs(m._day);
   const row=document.querySelector(`.mr[data-id="${msgId}"]`);
-  if (row) { const isMe=m.from===CU.name; row.querySelector('.msg-block').lastElementChild?.remove(); const tmp=document.createElement('div'); tmp.innerHTML=buildReactions(m,isMe); if (tmp.firstElementChild) row.querySelector('.msg-block').appendChild(tmp.firstElementChild); }
+  if (row) {
+    const isMe = m.from === CU.name;
+    let rrow = document.querySelector(`.react-row[data-for="${m.id}"]`);
+    const reactH = buildReactions(m, isMe);
+    if (reactH) {
+      if (!rrow) {
+        rrow = document.createElement('div');
+        rrow.className = 'react-row ' + (isMe ? 'me' : 'them');
+        rrow.dataset.for = m.id;
+        row.insertAdjacentElement('afterend', rrow);
+      }
+      rrow.innerHTML = reactH;
+    } else if (rrow) {
+      rrow.remove();
+    }
+  }
 }
 
 // ═══════════════════════════════════════════════════
@@ -1562,47 +2052,94 @@ async function compressImage(file, maxSize, quality) {
 }
 
 // ─ PTT ─
+let _pttRecording = false;
+
+async function togglePTT() {
+  if (_pttRecording) {
+    await stopPTT();
+  } else {
+    await startPTT();
+  }
+}
+
 async function startPTT(e) {
   if (e) e.preventDefault();
-  if (!activeChat) return;
+  if (!activeChat || _pttRecording) return;
   try {
-    pttStream=await navigator.mediaDevices.getUserMedia({audio:true});
-    const mime=MediaRecorder.isTypeSupported('audio/webm;codecs=opus')?'audio/webm;codecs=opus':'audio/ogg;codecs=opus';
-    mediaRec=new MediaRecorder(pttStream,{mimeType:mime});
-    pttChunks=[];
-    mediaRec.ondataavailable=e=>pttChunks.push(e.data);
+    pttStream = await navigator.mediaDevices.getUserMedia({audio:true});
+    const mime = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : 'audio/ogg;codecs=opus';
+    mediaRec = new MediaRecorder(pttStream, {mimeType:mime});
+    pttChunks = [];
+    mediaRec.ondataavailable = e => pttChunks.push(e.data);
     mediaRec.start();
+    _pttRecording = true;
     document.getElementById('ptt-btn').classList.add('rec');
-    document.getElementById('ptt-ind').classList.add('on');
-    pttSecs=0; document.getElementById('ptt-timer').textContent='0:00';
-    pttClock=setInterval(()=>{ pttSecs++; document.getElementById('ptt-timer').textContent=fmtDur(pttSecs); },1000);
-  } catch { toast('Нет доступа к микрофону'); }
+    document.getElementById('ptt-btn').title = 'Нажмите для отправки';
+    const cancelBtn = document.getElementById('ptt-cancel');
+    if (cancelBtn) cancelBtn.style.display = '';
+    const ind = document.getElementById('ptt-indicator') || document.getElementById('ptt-ind');
+    if (ind) ind.classList.add('active');
+    pttSecs = 0;
+    const timerEl = document.getElementById('ptt-timer');
+    if (timerEl) timerEl.textContent = '0:00';
+    pttClock = setInterval(() => {
+      pttSecs++;
+      const el = document.getElementById('ptt-timer');
+      if (el) el.textContent = fmtDur(pttSecs);
+    }, 1000);
+  } catch(e) { toast('Нет доступа к микрофону'); }
 }
+
 async function stopPTT(e) {
   if (e) e.preventDefault();
-  if (!mediaRec||mediaRec.state==='inactive') return;
+  if (!mediaRec || mediaRec.state === 'inactive' || !_pttRecording) return;
   clearInterval(pttClock);
+  _pttRecording = false;
   document.getElementById('ptt-btn').classList.remove('rec');
-  document.getElementById('ptt-ind').classList.remove('on');
-  const dur=pttSecs;
+  document.getElementById('ptt-btn').title = 'Голосовое сообщение';
+  const cancelBtn = document.getElementById('ptt-cancel');
+  if (cancelBtn) cancelBtn.style.display = 'none';
+  const ind = document.getElementById('ptt-indicator') || document.getElementById('ptt-ind');
+  if (ind) ind.classList.remove('active');
+  const timerEl = document.getElementById('ptt-timer');
+  if (timerEl) timerEl.textContent = '0:00';
+  const dur = pttSecs;
   mediaRec.stop();
-  pttStream.getTracks().forEach(t=>t.stop());
-  mediaRec.onstop=async()=>{
-    const blob=new Blob(pttChunks,{type:mediaRec.mimeType});
-    if (blob.size<500) return;
-    const ts=Date.now();
-    const ext=mediaRec.mimeType.includes('ogg')?'ogg':'webm';
-    const diskPath=`${ROOT}/chats/${activeChat.id}/files/voice_${ts}_${CU.name}.${ext}`;
+  pttStream.getTracks().forEach(t => t.stop());
+  mediaRec.onstop = async () => {
+    const blob = new Blob(pttChunks, {type: mediaRec.mimeType});
+    if (blob.size < 500) return;
+    const ts = Date.now();
+    const ext = mediaRec.mimeType.includes('ogg') ? 'ogg' : 'webm';
+    const diskPath = `${ROOT}/chats/${activeChat.id}/files/voice_${ts}_${CU.name}.${ext}`;
     await yMkdir(`${ROOT}/chats/${activeChat.id}/files`);
-    await yWriteBlob(diskPath,blob);
-    const url=await yDlUrl(diskPath);
-    const m={id:mkId(),from:CU.name,type:'voice',fileUrl:url,duration:dur,time:ts,replyTo:replyTo?.id||null,_day:todayStr()};
+    await yWriteBlob(diskPath, blob);
+    const url = await yDlUrl(diskPath);
+    const m = {id:mkId(), from:CU.name, type:'voice', fileUrl:url, duration:dur, time:ts, replyTo:replyTo?.id||null, _day:todayStr()};
     clearReply();
     await appendMsg(m);
   };
 }
 
-// ─ typing ─
+function cancelPTT() {
+  if (!mediaRec || !_pttRecording) return;
+  clearInterval(pttClock);
+  _pttRecording = false;
+  mediaRec.onstop = null; // prevent sending
+  mediaRec.stop();
+  pttStream.getTracks().forEach(t => t.stop());
+  document.getElementById('ptt-btn').classList.remove('rec');
+  document.getElementById('ptt-btn').title = 'Голосовое сообщение';
+  const cancelBtn = document.getElementById('ptt-cancel');
+  if (cancelBtn) cancelBtn.style.display = 'none';
+  const ind = document.getElementById('ptt-indicator') || document.getElementById('ptt-ind');
+  if (ind) ind.classList.remove('active');
+  const timerEl = document.getElementById('ptt-timer');
+  if (timerEl) timerEl.textContent = '0:00';
+  toast('Запись отменена');
+}
+
+
 async function sendTyping() {
   if (!activeChat) return;
   clearTimeout(typingTimer);
@@ -1655,7 +2192,10 @@ async function appendMsg(m) {
     const sep=document.createElement('div'); sep.className='day-sep'; sep.textContent=fmtDay(m._day);
     wrap.appendChild(sep);
   }
-  wrap.appendChild(buildMsg(m)); scrollBottom();
+  const el = buildMsg(m);
+  wrap.appendChild(el);
+  if (el._reactRow) wrap.appendChild(el._reactRow);
+  scrollBottom();
   const c=chats.find(x=>x.id===activeChat.id);
   if(c){c.lastMsg=m;renderChatList();}
   await saveMsgToDisk(m);
@@ -1821,7 +2361,6 @@ function openModal(id) { document.getElementById('modal-'+id.replace('modal-',''
 function closeModal(id) { document.getElementById(id.startsWith('modal-')?id:'modal-'+id).classList.remove('open'); }
 document.querySelectorAll('.modal-ov').forEach(ov=>ov.addEventListener('click',e=>{ if(e.target===ov) ov.classList.remove('open'); }));
 
-function openNewChatPicker() { openModal('modal-newchat'); }
 function openModal(id) {
   const el=document.getElementById(id); if(el) el.classList.add('open');
 }
@@ -2007,6 +2546,7 @@ function removeBg() {
 function openSettings() { renderSettings(); document.getElementById('settings-panel').classList.add('open'); }
 function closeSettings() { document.getElementById('settings-panel').classList.remove('open'); }
 function renderSettings() {
+  const ic = (n,s=18) => IC[n] ? `<span style='display:flex;align-items:center;color:var(--accent);width:${s}px;height:${s}px'>${IC[n].replace('<svg ','<svg width="'+s+'" height="'+s+'" ')}</span>` : '';
   const body=document.getElementById('settings-body');
   const theme=CU.theme||'light';
   body.innerHTML=`
@@ -2024,17 +2564,23 @@ function renderSettings() {
     </div>
 
     <div class="settings-section">
+      <h3>Цветовая схема</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:4px">
+        ${[['business','Деловой'],['warm','Тёплый'],['darktech','Тёмный тех'],['teal','Бирюзовый']].map(([s,l])=>`<div class="theme-opt ${(CU.style||'business')===s?'active':''}" onclick="setStyle('${s}')" style="font-size:12px;padding:8px 6px">${l}</div>`).join('')}
+      </div>
+    </div>
+    <div class="settings-section">
       <h3>Тема</h3>
       <div class="theme-selector">
-        <div class="theme-opt ${theme==='light'?'active':''}" onclick="setTheme('light')">☀️ Светлая</div>
-        <div class="theme-opt ${theme==='dark'?'active':''}" onclick="setTheme('dark')">🌙 Тёмная</div>
+        <div class="theme-opt ${theme==='light'?'active':''}" onclick="setTheme('light')" style="display:flex;align-items:center;gap:6px;justify-content:center">${ic('sun',14)} Светлая</div>
+        <div class="theme-opt ${theme==='dark'?'active':''}" onclick="setTheme('dark')" style="display:flex;align-items:center;gap:6px;justify-content:center">${ic('moon',14)} Тёмная</div>
       </div>
     </div>
 
     <div class="settings-section">
       <h3>Безопасность</h3>
       <div class="settings-row" onclick="${CU.pin?'removePIN()':'showPinSet()'}">
-        <span class="sr-ic">🔒</span>
+        <span class="sr-ic">${ic("lock")}</span>
         <span class="sr-label">PIN-код</span>
         <span class="sr-val">${CU.pin?'Включён':'Выключен'}</span>
       </div>
@@ -2043,7 +2589,7 @@ function renderSettings() {
     <div class="settings-section">
       <h3>Уведомления</h3>
       <div class="settings-row" onclick="toggleSetting('sounds')">
-        <span class="sr-ic">🔔</span>
+        <span class="sr-ic">${ic("bell")}</span>
         <span class="sr-label">Звуки</span>
         <div class="toggle ${CU.sounds?'on':''}"></div>
       </div>
@@ -2056,9 +2602,9 @@ function renderSettings() {
     </div>
 
     <div class="settings-section">
-      <div class="settings-row" onclick="logout()" style="background:#fef2f2">
-        <span class="sr-ic">🚪</span>
-        <span class="sr-label" style="color:var(--red)">Выйти</span>
+      <div class="settings-row" onclick="logout()" class="settings-row-logout" style="background:#fef2f2;border:1px solid #fecaca">
+        <span class="sr-ic" style="display:flex;align-items:center;color:var(--red)" id="ic-logout"></span>
+        <span class="sr-label" style="color:var(--red);font-weight:700">Выйти из аккаунта</span>
       </div>
     </div>
   `;
@@ -2070,6 +2616,13 @@ function setColor(c) {
   document.querySelectorAll('.cswatch').forEach(s=>s.classList.toggle('sel',s.style.background===c));
   saveMyProfile();
   renderChatList();
+}
+function setStyle(s) {
+  if (CU) CU.style = s;
+  localStorage.setItem('fm_style', s);
+  document.documentElement.setAttribute('data-style', s);
+  saveMyProfile().catch(()=>{});
+  renderSettings();
 }
 function setTheme(t) {
   CU.theme=t; applyTheme(t); saveMyProfile(); renderSettings();
@@ -2146,6 +2699,7 @@ document.querySelector('[onclick="openModal(\'modal-group\')"]')?.addEventListen
 // ═══════════════════════════════════════════════════
 //  START
 // ═══════════════════════════════════════════════════
+document.addEventListener("DOMContentLoaded", initIcons);
 init();
 </script>
 
