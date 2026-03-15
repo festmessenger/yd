@@ -677,7 +677,9 @@ msg-highlight{background:rgba(255,200,0,.4);border-radius:3px}
 <!-- ══════════════ SETUP ══════════════ -->
 <div class="screen fullpage active" id="screen-setup">
   <div class="auth-card">
-    <div class="auth-logo"><div class="icon">💬</div><h1>FestMessenger</h1><p>Первый запуск — введите токен Яндекса</p></div>
+    <div class="auth-logo"><div class="icon">💬</div><h1>FestMessenger</h1><p>Первый запуск — введите токен Яндекса</p>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px;padding:3px 10px;background:var(--surface3);border-radius:20px;display:inline-block">v0.1.0</div>
+    </div>
     <div class="field"><label>OAuth токен Яндекса</label><input type="password" id="s-token" placeholder="y0_AgAAAA..."></div>
     <div id="s-msg" class="auth-msg"></div>
   
@@ -2719,6 +2721,13 @@ function setColor(c) {
   document.querySelectorAll('.cswatch').forEach(s=>s.classList.toggle('sel',s.style.background===c));
   saveMyProfile();
   renderChatList();
+}
+function setIconStyle(s) {
+  if (CU) CU.iconStyle = s;
+  localStorage.setItem('fm_icon_style', s);
+  saveMyProfile().catch(()=>{});
+  renderSettings();
+  toast('Стиль иконок: ' + {linear:'Линейные',filled:'Заполненные',duotone:'Двухтонные'}[s]);
 }
 function setStyle(s) {
   if (CU) CU.style = s;
